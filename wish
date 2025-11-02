@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Happy Birthday — A Special Proposal 💖</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E">
+  <style>
+    /* ---------- Fonts & reset ---------- */
+    /* @import removed, now in <head> */
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: #ffeef0;
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility
+    }
+
+    /* ---------- App container (centers content) ---------- */
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(255, 107, 129, 0.06), transparent),
+        radial-gradient(900px 400px at 90% 90%, rgba(255, 209, 102, 0.04), transparent),
+        linear-gradient(135deg, #ffefef, #fff5f0);
+      overflow: hidden;
+    }
+
+    /* ---------- Card UI (responsive & mobile-first) ---------- */
+    .card {
+      width: 100%;
+      max-width: 720px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.85));
+      box-shadow: 0 18px 50px rgba(5, 10, 30, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      padding: 28px;
+      position: relative;
+      overflow: visible;
+      transform-origin: center;
+      transition: transform .6s cubic-bezier(.2, .9, .2, 1), box-shadow .3s;
+    }
+
+    /* Full-screen behaviour when installed (keeps same look) */
+    :root {
+      --accent1: #ff6b81;
+      --accent2: #ffd166;
+      --text: #2e2e3a
+    }
+
+    /* IMPROVEMENT: Removed .card.openFull as it was unused */
+
+    .headline {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(26px, 5.5vw, 42px);
+      margin: 0;
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 6px 26px rgba(255, 110, 140, 0.14);
+      text-align: center;
+    }
+
+    .sub {
+      margin-top: 8px;
+      color: rgba(30, 30, 40, 0.9);
+      text-align: center;
+      font-size: clamp(14px, 2.1vw, 16px)
+    }
+
+    /* Typewriter sentence container */
+    .message {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .typewrap {
+      width: 100%;
+      max-width: 680px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      box-shadow: 0 8px 24px rgba(8, 12, 30, 0.05);
+      color: var(--text);
+      font-size: clamp(16px, 3.2vw, 18px);
+      line-height: 1.55;
+      position: relative;
+    }
+
+    .typewriter {
+      display: inline-block;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .caret {
+      display: inline-block;
+      width: 10px;
+      height: 26px;
+      background: linear-gradient(var(--accent1), var(--accent2));
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: blink 1s steps(2) infinite;
+      border-radius: 4px;
+    }
+
+    @keyframes blink {
+
+      0%,
+      50% {
+        opacity: 1
+      }
+
+      51%,
+      100% {
+        opacity: 0
+      }
+    }
+
+    /* Buttons area */
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 12px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #071124;
+      background: linear-gradient(90deg, var(--accent1), #ff8aa2);
+      box-shadow: 0 8px 30px rgba(255, 110, 140, 0.14);
+      /* IMPROVEMENT: Added transform to transition for new "No" button effect */
+      transition: transform .18s ease, box-shadow .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active {
+      transform: scale(.98)
+    }
+
+    .ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(30, 30, 30, 0.06);
+      box-shadow: none;
+      font-weight: 600
+    }
+
+    /* Bottom footer */
+    .footer {
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(60, 60, 72, 0.7);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+
+    .footer.show {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* small control panel on top-right (music & install) */
+    .controls {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      display: flex;
+      gap: 10px;
+      z-index: 120;
+    }
+
+    .iconBtn {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 6px 18px rgba(20, 20, 40, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform .18s
+    }
+
+    .iconBtn:active {
+      transform: scale(.96)
+    }
+
+    /* hearts & sparkles layers */
+    /* IMPROVEMENT: Removed .sparkle-layer, it's now part of the confetti canvas */
+    .hearts-layer,
+    .confetti-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10
+    }
+
+    /* IMPROVEMENT: Removed .sparkle styles, now handled by canvas */
+
+    /* confetti canvas fits */
+    canvas.confetti {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9
+    }
+
+    /* responsive niceties */
+    @media (max-width:520px) {
+      .card {
+        padding: 22px 16px;
+        border-radius: 12px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08)
+      }
+
+      .typewrap {
+        padding: 14px
+      }
+
+      .headline {
+        font-size: 24px
+      }
+
+      .sub {
+        font-size: 13px
+      }
+
+      .controls {
+        right: 8px;
+        top: 8px;
+        gap: 8px
+      }
+    }
+
+    /* IMPROVEMENT: Removed .installHint as it was unused */
+  </style>
+</head>
+
+<body>
+  <div class="shell" id="appShell">
+    <div class="card" id="card">
+      <div class="controls" id="controls">
+        <button class="iconBtn" id="muteBtn" aria-label="Mute/Unmute music" title="Music on/off"
+          style="transform:scale(1);" aria-pressed="true">
+          <svg id="soundIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M5 10v4h4l5 5V5L9 10H5z" fill="#ff6b81"></path>
+            <path id="wave" d="M16.5 9.5a3.5 3.5 0 010 5" stroke="#ff6b81" stroke-width="1.6" stroke-linecap="round"
+              stroke-linejoin="round" style="opacity: 0;"></path>
+          </svg>
+        </button>
+        <button class="iconBtn" id="installBtn" title="Install app" aria-label="Install" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v12" stroke="#ff8aa2" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M8 7l4-4 4 4" stroke="#ff8aa2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            <rect x="3" y="15" width="18" height="6" rx="2" stroke="#ff8aa2" stroke-width="1.6" />
+          </svg>
+        </button>
+      </div>
+
+      <h1 class="headline">Happy Birthday, My Beautiful Angel 🎂</h1>
+      <div class="sub">A little surprise I made just for you — full of love, music & sparkles ✨</div>
+
+      <div class="message" style="align-items:center">
+        <div class="typewrap" id="typewrap">
+          <div class="typewriter" id="typewriter" aria-live="polite"></div>
+          <span class="caret" id="caret" aria-hidden></span>
+        </div>
+
+        <div class="actions" id="actions">
+          <button id="yesBtn" class="btn" aria-label="Yes — accept">💍 Yes, forever!</button>
+          <button id="noBtn" class="btn ghost" aria-label="No — playfully">😅 No</button>
+        </div>
+      </div>
+
+      <div class="footer" id="footer">Made with love by <strong>Nitin ❤️</strong></div>
+    </div>
+  </div>
+
+  <div class="hearts-layer" id="heartsLayer"></div>
+  <canvas class="confetti" id="confettiCanvas"></canvas>
+
+  <audio id="bgAudio" loop playsinline preload="auto" crossorigin="anonymous">
+    <source id="audioSource" src="data:audio/mpeg;base64,//uQZAAAAAAAAAAAAAAAAAAAAAA..." type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+  <script>
+    /* =========================
+       All JS: UI behaviour
+       ========================= */
+
+    (() => {
+      // Elements
+      const typeEl = document.getElementById('typewriter');
+      const caretEl = document.getElementById('caret');
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+      const footer = document.getElementById('footer');
+      const heartsLayer = document.getElementById('heartsLayer');
+      // IMPROVEMENT: Removed sparkleLayer lookup
+      const confettiCanvas = document.getElementById('confettiCanvas');
+      const muteBtn = document.getElementById('muteBtn');
+      const soundIcon = document.getElementById('soundIcon');
+      const installBtn = document.getElementById('installBtn');
+      const bgAudio = document.getElementById('bgAudio');
+      const card = document.getElementById('card');
+      const appShell = document.getElementById('appShell');
+
+      // --- MESSAGE to type out (modify to personalize) ---
+      const MESSAGE = "My dearest love,\nYou are my sunlight on cloudy days — so beautiful and kind from your heart. Today I celebrate you and every sweet moment we've shared. Will you walk with me through every tomorrow, hand-in-hand, and be mine forever? 💖";
+
+      /* --------------------------
+         Typewriter + entrance
+         -------------------------- */
+      let idx = 0;
+      const typingInterval = 36; // smaller -> faster
+      function typeNext() {
+        if (idx < MESSAGE.length) {
+          const ch = MESSAGE[idx++];
+          // convert newline to break
+          if (ch === '\n') typeEl.innerHTML += '<br>';
+          else typeEl.innerHTML += ch.replace(/ /g, '\u00A0'); // preserve spaces
+          setTimeout(typeNext, typingInterval);
+        } else {
+          // finish caret
+          caretEl.style.display = 'none';
+          // reveal footer
+          setTimeout(() => footer.classList.add('show'), 600);
+        }
+      }
+
+      // entrance animation: fade-in with sparkles
+      function entrance() {
+        // card animate (slight pop)
+        card.style.transform = 'translateY(0) scale(1)';
+        
+        // IMPROVEMENT: Replaced DOM sparkles with a small confetti burst
+        // This is much more performant.
+        makeConfettiBurst(innerWidth / 2, innerHeight / 3, 40);
+        
+        // start typewriter after a short delay for dramatic effect
+        setTimeout(typeNext, 700);
+      }
+
+      // IMPROVEMENT: Removed spawnSparkle() function.
+
+      /* --------------------------
+         Floating hearts generation
+         -------------------------- */
+      function spawnHeart() {
+        const heart = document.createElement('div');
+        heart.style.position = 'absolute';
+        heart.style.left = (Math.random() * 100) + 'vw';
+        heart.style.bottom = '-40px';
+        heart.style.fontSize = (12 + Math.random() * 28) + 'px';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = 5;
+        heart.style.userSelect = 'none';
+        heart.style.opacity = 0.95;
+        heart.innerHTML = '❤️';
+        heart.style.transform = `translateY(0) scale(${0.9 + Math.random() * 0.6}) rotate(${Math.random() * 40 - 20}deg)`;
+        heartsLayer.appendChild(heart);
+        const rise = 4000 + Math.random() * 6000;
+        const endX = (Math.random() * 200 - 100);
+        heart.animate([
+          { transform: `translateY(0) translateX(0)`, opacity: 1 },
+          { transform: `translateY(-${rise / 8}px) translateX(${endX / 6}px)`, opacity: 0.9 },
+          { transform: `translateY(-${rise / 4}px) translateX(${endX / 3}px)`, opacity: 0.6 },
+          { transform: `translateY(-${rise}px) translateX(${endX}px)`, opacity: 0 }
+        ], { duration: rise, easing: 'cubic-bezier(.2,.9,.2,1)' });
+        // remove after duration
+        setTimeout(() => heart.remove(), rise + 120);
+      }
+      // Start the interval and store its ID
+      let heartInterval = setInterval(spawnHeart, 650);
+
+      /* --------------------------
+         Confetti (canvas)
+         -------------------------- */
+      const ctx = confettiCanvas.getContext('2d');
+      function resizeCanvas() { confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
+      window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+      let confettiPieces = [];
+      function makeConfettiBurst(x, y, count = 80) {
+        for (let i = 0; i < count; i++) {
+          confettiPieces.push({
+            x: x || (innerWidth / 2 + (Math.random() * 200 - 100)),
+            y: y || (innerHeight / 2 + (Math.random() * 120 - 60)),
+            vx: (Math.random() * 6 - 3),
+            vy: (Math.random() * -6 - 2),
+            size: 6 + Math.random() * 8,
+            ang: Math.random() * 360,
+            color: `hsl(${Math.random() * 60 + 320},80%,60%)`, // Pinks and reds
+            rotSpeed: (Math.random() * 8 - 4),
+            life: 80 + Math.random() * 60
+          });
+        }
+        if (!confettiLooping) confettiLooping = requestAnimationFrame(confettiLoop);
+      }
+      let confettiLooping = null;
+      function confettiLoop() {
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+        confettiPieces.forEach((p) => {
+          p.x += p.vx; p.y += p.vy; p.vy += 0.12; p.ang += p.rotSpeed; p.life--;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.ang * Math.PI / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        });
+        confettiPieces = confettiPieces.filter(p => p.y < confettiCanvas.height + 50 && p.life > 0);
+        if (confettiPieces.length > 0) confettiLooping = requestAnimationFrame(confettiLoop);
+        else { if (confettiLooping) { cancelAnimationFrame(confettiLooping); confettiLooping = null } }
+      }
+
+      /* --------------------------
+         YES / NO logic
+         -------------------------- */
+      yesBtn.addEventListener('click', async (e) => {
+        // special visual on yes: confetti + many hearts + audio flourish
+        makeConfettiBurst(e.clientX, e.clientY, 120);
+        for (let i = 0; i < 36; i++) setTimeout(spawnHeart, i * 80);
+        footer.classList.add('show');
+        // gentle scale/pop feedback on yes
+        yesBtn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 550, easing: 'cubic-bezier(.2,.9,.2,1)' });
+        // small success message overlay
+        showTinyOverlay("She said YES! 💍💕");
+        // try a short audio flourish if available (optional)
+        playAudioFlourish();
+        
+        // IMPROVEMENT: Stop the endless hearts from spawning
+        clearInterval(heartInterval);
+      });
+
+      // --- IMPROVEMENT: New "No" Button Logic ---
+      // This is more accessible (A11y) and less frustrating, while still being playful.
+      let noClickCount = 0;
+      let yesScale = 1;
+      const noMessages = [
+        "😅 No",
+        "Are you sure? 🥺",
+        "Really?",
+        "But... but why?",
+        "My heart... 💔",
+        "Last chance! 😭"
+      ];
+      
+      noBtn.addEventListener('click', () => {
+        noClickCount++;
+        // Cycle through messages
+        noBtn.innerHTML = noMessages[noClickCount % noMessages.length];
+        // Playfully grow the "Yes" button
+        yesScale += 0.15;
+        yesBtn.style.transform = `scale(${yesScale})`;
+        // Small wobble for fun
+        noBtn.animate([{ transform: 'translate(0,0)' }, { transform: 'translate(3px,-3px)' }, { transform: 'translate(0,0)' }], { duration: 300 });
+      });
+
+      // IMPROVEMENT: Removed old moveNoButton() function and its listeners.
+
+      /* --------------------------
+         Tiny overlay message (center)
+         -------------------------- */
+      function showTinyOverlay(msg = '') {
+        const over = document.createElement('div');
+        over.style.position = 'fixed'; over.style.inset = '0'; over.style.display = 'flex';
+        over.style.alignItems = 'center'; over.style.justifyContent = 'center'; over.style.zIndex = 9999;
+        over.style.pointerEvents = 'none';
+        const card = document.createElement('div');
+        card.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.88))';
+        card.style.padding = '18px 26px'; card.style.borderRadius = '14px';
+        card.style.boxShadow = '0 12px 40px rgba(6,10,30,0.12)';
+        card.style.fontSize = '18px'; card.style.fontWeight = 700; card.style.color = '#111';
+        card.textContent = msg || '💖';
+        card.style.pointerEvents = 'auto';
+        over.appendChild(card);
+        document.body.appendChild(over);
+        card.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 450, easing: 'cubic-bezier(.2,.9,.2,1)' });
+        setTimeout(() => { card.animate([{ opacity: 1 }, { opacity: 0, transform: 'translateY(-10px)' }], { duration: 450 }); setTimeout(() => over.remove(), 480) }, 2400);
+      }
+
+      /* --------------------------
+         Audio controls + flourish
+         -------------------------- */
+      // simple flourish: try to play a short oscillator if external flourish audio is not provided
+      function playAudioFlourish() {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.type = 'sine'; o.frequency.value = 560;
+          g.gain.value = 0.0001;
+          o.connect(g); g.connect(ctx.destination);
+          o.start();
+          g.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.1);
+          o.stop(ctx.currentTime + 1.2);
+        } catch (e) { /* ignore if not allowed */ }
+      }
+
+      // Music handling: autoplay muted allowed in browsers, so start muted and allow unmute
+      let audioAllowed = false;
+      function tryStartAudio() {
+        // attempt to play (muted)
+        bgAudio.muted = true;
+        const p = bgAudio.play();
+        if (p && p.then) {
+          p.then(() => { audioAllowed = true; updateMuteIcon(); })
+            .catch(() => { audioAllowed = false; updateMuteIcon(); });
+        }
+      }
+      tryStartAudio();
+
+      // Toggle mute/unmute (user gesture)
+      muteBtn.addEventListener('click', async () => {
+        if (bgAudio.paused) {
+          try {
+            bgAudio.muted = false;
+            await bgAudio.play();
+          } catch (e) {
+            // if play fails (autoplay policies), unmute then prompt small overlay to tap to start
+            bgAudio.muted = false;
+            showTinyOverlay('Tap anywhere to start music 🎵');
+          }
+        } else {
+          bgAudio.muted = !bgAudio.muted;
+          if (!bgAudio.muted && bgAudio.paused) {
+            try { await bgAudio.play(); } catch (e) { /* silent */ }
+          }
+        }
+        updateMuteIcon();
+      });
+
+      function updateMuteIcon() {
+        const muted = bgAudio.muted || bgAudio.paused;
+        // change svg wave visibility
+        const pathWave = document.getElementById('wave');
+        if (pathWave) pathWave.style.opacity = muted ? '0' : '1';
+        // update aria-pressed for accessibility
+        muteBtn.setAttribute('aria-pressed', !muted);
+        // subtle bounce
+        muteBtn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }], { duration: 280 });
+      }
+
+      // If user taps anywhere and audio hasn't started yet, start it (gesture)
+      document.addEventListener('pointerdown', async function one(e) {
+        if (bgAudio.paused) {
+          try { await bgAudio.play(); bgAudio.muted = false; updateMMuteIcon(); } catch (e) { bgAudio.muted = true; }
+        }
+        document.removeEventListener('pointerdown', one);
+      });
+
+      /* --------------------------
+         PWA: manifest
+         -------------------------- */
+      let deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // show install button if available
+        installBtn.style.display = 'inline-flex';
+      });
+
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          if (choice && choice.outcome === 'accepted') {
+            showTinyOverlay('Added to home screen ✨');
+          }
+          deferredPrompt = null;
+          installBtn.style.display = 'none';
+        }
+      });
+
+      // Create a manifest blob and link it (so it's a single-file experience)
+      function createManifest() {
+        const manifest = {
+          name: "My Love — Birthday",
+          short_name: "LoveCard",
+          description: "A special birthday + proposal made with love",
+          start_url: ".",
+          display: "standalone",
+          background_color: "#fff6f6",
+          theme_color: "#ff6b81",
+          icons: [{
+            src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%23ff6b81'/%3E%3Ctext x='50%' y='55%' font-size='64' text-anchor='middle' fill='white' font-family='Arial'%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E",
+            sizes: "128x128",
+            type: "image/svg+xml"
+          }]
+        };
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const existing = document.querySelector('link[rel="manifest"]');
+        if (existing) existing.href = url; else {
+          const l = document.createElement('link'); l.rel = 'manifest'; l.href = url; document.head.appendChild(l);
+        }
+      }
+      createManifest();
+
+      // IMPROVEMENT: Removed dynamic service worker registration.
+      // It was non-standard and could cause issues. The manifest-based
+      // "Add to Home Screen" will still work perfectly.
+
+      /* --------------------------
+         UI start
+         -------------------------- */
+      // initial tiny transform for pop effect
+      card.style.transform = 'translateY(12px) scale(.98)';
+      setTimeout(() => {
+        card.style.transform = 'translateY(0) scale(1)';
+        entrance();
+      }, 120);
+
+      /* --------------------------
+         Keyboard / accessibility touch-ups
+         -------------------------- */
+      // allow keyboard yes/no (Y/N)
+      document.addEventListener('keydown', (ev) => {
+        if (ev.key.toLowerCase() === 'y') yesBtn.click();
+        // IMPROVEMENT: Triggers the new, accessible "No" button logic
+        if (ev.key.toLowerCase() === 'n') noBtn.click();
+      });
+
+    })();
+  </script>
+</body>
+
+</html>
